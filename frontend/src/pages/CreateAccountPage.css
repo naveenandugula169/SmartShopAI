@@ -1,0 +1,109 @@
+/* Same gradient background as login */
+.register-wrapper {
+    height: 100vh;
+    background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 1s ease;
+  }
+  
+  /* Glass style card */
+  .register-card {
+    width: 400px;
+    padding: 32px;
+    background: rgba(255, 255, 255, 0.09);
+    backdrop-filter: blur(15px);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    animation: slideUp 0.6s ease-out;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .logo {
+    font-size: 32px;
+    font-weight: 800;
+  }
+  
+  .logo span {
+    color: #38bdf8;
+  }
+  
+  .title {
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  .subtitle {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  
+  .input-group {
+    text-align: left;
+    margin-top: 18px;
+  }
+  
+  .input-group label {
+    font-size: 14px;
+    opacity: 0.9;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 15px;
+  }
+  
+  .input-group input:focus {
+    outline: 2px solid #38bdf8;
+  }
+  
+  .register-btn {
+    width: 100%;
+    margin-top: 25px;
+    background: #38bdf8;
+    color: #0f172a;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.25s ease;
+  }
+  
+  .register-btn:hover {
+    background: #7dd3fc;
+    transform: translateY(-2px);
+  }
+  
+  .footer {
+    margin-top: 20px;
+  }
+  
+  .footer a {
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    0% { transform: translateY(40px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  
