@@ -4,7 +4,7 @@ server:
 spring:
   application:
     name: smartshop-backend
-  datasource:
+    datasource:
     url: "jdbc:h2:mem:smartshopdb"
     username: sa
     password: 
