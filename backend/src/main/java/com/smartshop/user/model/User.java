@@ -1,4 +1,4 @@
-package com.smartshop.user;
+package com.smartshop.user.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;

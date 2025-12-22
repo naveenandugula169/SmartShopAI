@@ -34,8 +34,7 @@ public class UserService {
 		User user = userRepository.findById(id)
 			.orElseThrow(() -> new IllegalArgumentException("User not found"));
 		user.setEmail(userDetails.getEmail());
-		user.setFirstName(userDetails.getFirstName());
-		user.setLastName(userDetails.getLastName());
+		user.setUsername(userDetails.getUsername());
 		return userRepository.save(user);
 	}
 	
