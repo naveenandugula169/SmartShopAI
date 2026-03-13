@@ -1,6 +1,6 @@
 package com.smartshop.ai.service;
 
-import com.smartshop.product.model.Product;
+import com.smartshop.product.model.Product;	
 import com.smartshop.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

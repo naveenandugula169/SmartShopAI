@@ -1,38 +1,103 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { authAPI } from "../api/auth";
 import "./CreateAccountPage.css";
 
 export default function CreateAccountPage() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
+    phoneNumber: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
+
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setErrorMessage(""); // clear error while typing
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     if (form.password !== form.confirmPassword) {
-      alert("Passwords do not match");
+      setErrorMessage("Passwords do not match");
       return;
     }
 
-    console.log("Create Account:", form);
+    try {
+      setLoading(true);
+
+      const response = await authAPI.register({
+        username: form.name,
+        email: form.email,
+        phoneNumber: form.phoneNumber,
+        password: form.password,
+      });
+
+      console.log("Register success:", response);
+      setSuccess(true);
+    } catch (error) {
+      console.error("Register error:", error);
+
+      if (typeof error === "string") {
+        setErrorMessage(error);
+      } else if (error.message) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage("Registration failed. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="register-wrapper">
       <div className="register-card">
-        <h1 className="logo">SmartShop<span>AI</span></h1>
+        <h1 className="logo">
+          SmartShop<span>AI</span>
+        </h1>
+
         <h2 className="title">Create an Account</h2>
-        <p className="subtitle">Start your intelligent shopping journey 🚀</p>
+        <p className="subtitle">
+          Start your intelligent shopping journey 🚀
+        </p>
+
+        {success && (
+          <div style={{ marginTop: 10, marginBottom: 10, color: "#22c55e" }}>
+            Account created successfully!{" "}
+            <button
+              type="button"
+              onClick={() => navigate("/login")}
+              style={{
+                background: "none",
+                border: "none",
+                color: "#38bdf8",
+                textDecoration: "underline",
+                cursor: "pointer",
+                padding: 0,
+                marginLeft: 4,
+              }}
+            >
+              Click here to login
+            </button>
+          </div>
+        )}
 
         <form onSubmit={onSubmit} className="register-form">
+
+          {errorMessage && (
+            <div style={{ color: "red", marginBottom: "10px" }}>
+              {errorMessage}
+            </div>
+          )}
 
           <div className="input-group">
             <label>Full Name</label>
@@ -55,6 +120,17 @@ export default function CreateAccountPage() {
               value={form.email}
               onChange={handleChange}
               required
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Phone Number</label>
+            <input
+              name="phoneNumber"
+              type="tel"
+              placeholder="Enter phone number"
+              value={form.phoneNumber}
+              onChange={handleChange}
             />
           </div>
 
@@ -82,8 +158,12 @@ export default function CreateAccountPage() {
             />
           </div>
 
-          <button type="submit" className="register-btn">
-            Create Account
+          <button
+            type="submit"
+            className="register-btn"
+            disabled={loading}
+          >
+            {loading ? "Creating..." : "Create Account"}
           </button>
         </form>
 

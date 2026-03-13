@@ -4,7 +4,7 @@ server:
 spring:
   application:
     name: smartshop-backend
-    datasource:
+  datasource:
     url: "jdbc:h2:mem:smartshopdb"
     username: sa
     password: 
@@ -28,3 +28,30 @@ logging:
   level:
     org.springframework.web: INFO
     org.hibernate: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+# Mail settings (configure SMTP for real email delivery). For local development you can use MailHog
+# or another SMTP test server. If not set, OTPs will be logged to application logs.
+# spring:
+#   mail:
+#     host: smtp.example.com
+#     port: 587
+#     username: your-username
+#     password: your-password
+#     properties:
+#       mail:
+#         smtp:
+#           auth: true
+#           starttls.enable: true
+
+app:
+  otp:
+    expiration-minutes: 10

@@ -38,6 +38,12 @@ public class User {
     @Column(name = "created_at", updatable = false)
     private Instant createdAt;
 
+  @Column(nullable = false)
+  private boolean enabled = false;
+
+  @Column(name = "phone_number")
+  private String phoneNumber;
+
     // --- Constructors ---
     public User() {}
 
@@ -67,4 +73,10 @@ public class User {
 
     public Instant getCreatedAt() { return createdAt; }
     public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
+
+  public boolean isEnabled() { return enabled; }
+  public void setEnabled(boolean enabled) { this.enabled = enabled; }
+
+  public String getPhoneNumber() { return phoneNumber; }
+  public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 }
